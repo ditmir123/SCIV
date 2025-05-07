@@ -1,0 +1,77 @@
+db.users.insertOne({
+  name: "Alice",
+  email: "alice@example.com",
+  age: 28,
+  roles: ["editor", "subscriber"]
+});
+
+db.users.insertMany([
+  { name: "Bob",   email: "bob@example.com",   age: 35, roles: ["admin"] },
+  { name: "Carol", email: "carol@example.com", age: 22, roles: ["subscriber"] }
+]);
+
+db.users.find();
+
+db.users.find({ age: { $gt: 25 } });
+
+db.users.findOne({ email: "alice@example.com" });
+
+db.users.find({}, { name: 1, email: 1, _id: 0 });
+
+db.users.updateOne(
+  { name: "Alice" },                   
+  { 
+    $set:   { status: "active" },      
+    $inc:   { age: 1 }              
+  }
+);
+
+db.users.updateMany(
+  { roles: "subscriber" },
+  { $addToSet: { roles: "newsletter" } }
+);
+
+db.users.replaceOne(
+  { email: "bob@example.com" },
+  { name: "Robert", email: "bob@example.com", age: 36, roles: ["admin", "editor"] }
+);
+
+db.users.deleteOne({ name: "Carol" });
+
+db.users.deleteMany({ roles: "subscriber" });
+
+db.users.drop();
+
+
+--------------
+
+
+
+db.users.insertOne(
+  {empId: 1, name: 'Clark', dept: 'Sales' }
+);
+
+db.users.insertMany([
+  {empId: 2, name: 'Dave', dept: 'Accounting' },
+  {empId: 3, name: 'Ava', dept: 'Sales' }
+]);
+
+
+db.users.find();
+
+db.users.find({dept: 'Sales'});
+
+db.users.find({empId: {$gt:2} });
+
+db.users.updateOne(   
+  {empId: 2 },
+  { $set: { dept: "HR" } })
+  
+
+db.users.deleteOne({name:'Clark'});
+
+db.users.deleteMany({name:'Dave'},{name:'Ava'});
+
+db.users.find();
+
+db.users.drop();
